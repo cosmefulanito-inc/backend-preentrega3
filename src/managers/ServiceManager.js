@@ -1,4 +1,3 @@
-// servicesManager.js
 import { promises as fs } from "node:fs"
 import { randomUUID } from "node:crypto"
 
@@ -7,9 +6,11 @@ const DEFAULT_PATH = "./src/data/services.json"
 // Leer todos los servicios de data
 export async function getServices(path = DEFAULT_PATH) {
   const content = await fs.readFile(path, "utf-8")
-
-  return JSON.parse(content)
+  const services = JSON.parse(content)
+  return services
 }
+
+
 
 // Buscar servicio por ID
 export async function getServiceById(id) {

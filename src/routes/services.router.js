@@ -21,7 +21,7 @@ router.get("/", async (req, res)=>{
         }
 
         if (available !== undefined) {
-        const isAvailable = available === 'true';
+        const isAvailable = available === 'true'
         services = services.filter(s => s.available === isAvailable)
         }
 
@@ -71,7 +71,7 @@ router.post("/", async (req, res)=>{
     try {
         const serviceData = req.body
         
-        if (!serviceData.name || !serviceData.price || !serviceData.duration || !serviceData.category || serviceData.available === undefined){
+        if (!serviceData.name || serviceData.price === undefined || !serviceData.duration || !serviceData.category || serviceData.available === undefined){
             return res.status(400).json({
                 status: "error",
                 message: "Faltan campos obligatorios"
@@ -98,7 +98,7 @@ router.post("/", async (req, res)=>{
 router.put("/:sid", async (req, res)=>{
     try {
         const serviceData = req.body
-        const sid = serviceData.id
+        const { sid } = req.params
 
         const updatedService = await updateService(sid, serviceData)
 
